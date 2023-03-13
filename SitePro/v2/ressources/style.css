@@ -1,0 +1,27 @@
+.menu{
+    display: flex;
+}
+#currentPage{
+    color: green;
+}
+
+.contenu{
+    color:aqua;
+    font-size: 30px;
+    text-align: center;
+}
+img{
+    width: 20%;
+    padding-left: 40%;
+}
+#contenu{
+    display: flex;
+    flex-direction: row; 
+}
+#menu{
+    background-color: rgb(7, 7, 74);
+    color: white;
+}
+#contenu_principal{
+    padding-left: 20%;
+}

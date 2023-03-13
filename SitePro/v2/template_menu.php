@@ -9,9 +9,21 @@ $mymenu = array(
 'projets' => array('Mes Projets')
 );
 // ...
+echo "<ul> ";
 foreach($mymenu as $pageId => $pageParameters) {
-echo ($pageParameters);
+    if($pageId==$currentPageId) {
+    
+        echo "<li > <a id='currentPage' href='{$currentPageId}.php'>{$pageParameters[0]} </a></li> <br>";
+    }
+
+    else
+    {
+
+    
+        echo " <li ><a href='${pageId}.php'>{$pageParameters[0]} </a></li> <br>";
+    }
 }
+echo "</ul> ";
 // ...
 }
 ?>
