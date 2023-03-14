@@ -1,18 +1,23 @@
+
 <?php
 require_once("template_header.php");
 require_once("template_menu.php");
 $currentPageId = 'accueil';
+$currentLang = 'fr';
 if(isset($_GET['page'])) {
 $currentPageId = $_GET['page'];
 }
+if(isset($_GET['langue'])) {
+    $currentLang = $_GET['langue'];
+    }
 ?>
 
 <?php
-renderMenuToHTML($currentPageId);
+renderMenuToHTML($currentPageId,$currentLang);
 ?>
 <section class="corps">
 <?php
-$pageToInclude = $currentPageId . ".php";
+$pageToInclude = $currentLang."/". $currentPageId . ".php";
 if(is_readable($pageToInclude))
 require_once($pageToInclude);
 else
