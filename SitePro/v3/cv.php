@@ -136,8 +136,6 @@
                 </div>
         </section>
         
-        <?php
-require_once('template_footer.php');
-?>
+       
     </body>
 </html>
