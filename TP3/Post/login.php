@@ -1,6 +1,14 @@
 <?php 
-  $_SESSION['login']='';
 session_start();
+if (isset($_GET['status'])){
+if($_GET['status']=='disconnect'){
+  session_unset();
+  session_destroy();
+  echo "Hello";
+}
+}
+ 
+
 $style='style1';
 if(isset($_COOKIE['style'])){
     $style=$_COOKIE['style'];
@@ -45,8 +53,5 @@ if(isset($_COOKIE['style'])){
 <?php 
 if(isset($_GET['css'])){
   setcookie("style", $_GET['css']);
-  
- 
 }
-echo $_SESSION['login'];
 ?>
