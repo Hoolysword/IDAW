@@ -1,18 +1,24 @@
 <?php 
+$style='style1';
+if(isset($_COOKIE['style'])){
+  $style=$_COOKIE['style'];
+}
+if(isset($_GET['css'])){
+  setcookie("style", $_GET['css']);
+  $style=$_GET['css'];
+}
+
 session_start();
 if (isset($_GET['status'])){
 if($_GET['status']=='disconnect'){
   session_unset();
   session_destroy();
-  echo "Hello";
 }
 }
  
 
-$style='style1';
-if(isset($_COOKIE['style'])){
-    $style=$_COOKIE['style'];
-}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,7 +57,3 @@ if(isset($_COOKIE['style'])){
 </html>
 
 <?php 
-if(isset($_GET['css'])){
-  setcookie("style", $_GET['css']);
-}
-?>

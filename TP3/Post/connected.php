@@ -5,9 +5,8 @@ if(isset($_COOKIE['style'])){
 }
 ?>
 <?php
-session_start();
-$_SESSION['login']=$_POST['login'];
-$_SESSION['password']=$_POST['password'];
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,9 +27,9 @@ $users = array(
 $login = "anonymous";
 $errorText = "";
 $successfullyLogged = false;
-if(isset($_SESSION['login']) && isset($_SESSION['password'])) {
-$tryLogin=$_SESSION['login'];
-$tryPwd=$_SESSION['password'];
+if(isset($_POST['login']) && isset($_POST['password'])) {
+$tryLogin=$_POST['login'];
+$tryPwd=$_POST['password'];
 // si login existe et password correspond
 if( array_key_exists($tryLogin,$users) && $users[$tryLogin]==$tryPwd ) {
 $successfullyLogged = true;
@@ -40,12 +39,16 @@ $errorText = "Erreur de login/password";
 } else
 $errorText = "Merci d'utiliser le formulaire de login";
 if(!$successfullyLogged) {
+  
 echo $errorText;
-echo $_SESSION['login'];
-echo $_SESSION['password'];
+echo $_POST['login'];
+echo $_POST['password'];
 } else {
+  session_start();
+$_SESSION['login']=$_POST['login'];
+$_SESSION['password']=$_POST['password'];
+
 echo "<h1>Bienvenu ".$_SESSION['login']."</h1>";
-echo $_COOKIE['style'];
 }
 ?>
 <a  href="login.php?status=disconnect"  class="deletebtn">Deconnection</a>
