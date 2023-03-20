@@ -15,11 +15,14 @@ catch (PDOException $erreur) {
 }
  $name =  $_POST['name'];
 $email = $_POST['email'];
-  
+$id = $_GET['id'];
  // Performing insert query execution
  // here our table name is college
- $sql = "INSERT INTO users(name,email)  VALUES ('$name',
-     '$email')";
+ $sql = "UPDATE users
+ SET name = '$name',
+   email = '$email'
+  
+ WHERE id =$id";
 
  $pdo->prepare($sql)->execute();
 

@@ -13,13 +13,9 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 catch (PDOException $erreur) {
 //myLog('Erreur : '.$erreur->getMessage());
 }
- $name =  $_POST['name'];
-$email = $_POST['email'];
-  
- // Performing insert query execution
- // here our table name is college
- $sql = "INSERT INTO users(name,email)  VALUES ('$name',
-     '$email')";
+$id=$_GET['id'];
+$sql="DELETE FROM `users`
+WHERE id=$id";
 
  $pdo->prepare($sql)->execute();
 

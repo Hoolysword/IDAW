@@ -22,6 +22,6 @@ foreach($tables as $table){
 
 }
 $sql = file_get_contents('users.sql');
-$qr = $pdo->exec($sql);
+$pdo->exec($sql);
 
 ?>
