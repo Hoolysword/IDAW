@@ -1,0 +1,47 @@
+README
+
+This API allows you to manage a list of users stored in a database. You can perform the following CRUD operations:
+
+Create a new user
+Retrieve a list of all users or a single user by ID
+Update an existing user
+Delete a user
+Requirements:
+
+PHP 5.5 or higher
+MySQL
+Endpoints:
+
+GET /users - Retrieves a list of all users
+GET /users?id={id} - Retrieves a single user by ID
+POST /users - Creates a new user
+POST /users?id={id} - Updates an existing user by ID
+DELETE /users - Deletes all users
+DELETE /users?id={id} - Deletes a single user by ID
+To use the API, follow these steps:
+
+Create a database and table
+Create a new MySQL database
+
+Create a new table named users with the following fields:
+
+id (int, auto-increment, primary key)
+name (varchar)
+email (varchar)
+Configure the database connection
+Open the dbconnect.php file and modify the following variables according to your database configuration:
+
+$db_host - the hostname of your database server
+$db_name - the name of your database
+$db_user - the username to connect to the database
+$db_pass - the password to connect to the database
+Upload the API files to your server
+Upload all the files to your server.
+Test the API
+Open a web browser and navigate to the following URL: http://yourdomain.com/users
+If everything is configured correctly, you should see a list of all users in JSON format.
+Notes:
+
+All data is returned in JSON format.
+When creating or updating a user, you must include the name and email fields in the POST request.
+When updating a user, you must include the id field in the POST request.

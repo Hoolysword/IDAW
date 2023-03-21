@@ -57,9 +57,9 @@ if(isset($_GET['id'])){
   $user=$req->fetch();
   echo " <form action='update.php?id={$user['id']}' method='post'>";
   echo " <label for='name'>NOM:</label>";
-  echo " <input type='text' name='name' id='name' value=".$user['name'].">";
+  echo " <input type='text' name='name' id='name' value=".$user['name'].">"; 
   echo "<label for='email'>Email:</label>";
-  echo"<input type='text' name='email' id='email' value=".$user['email'].">";
+  echo "<input type='text' name='email' id='email' value=".$user['email'].">";
   echo " <input type='submit' value='Update'>";
   echo "                      </form>";
 }
@@ -68,7 +68,7 @@ else{
   echo " <label for='name'>NOM:</label>";
   echo " <input type='text' name='name' id='name'>";
   echo "<label for='email'>Email:</label>";
-  echo"<input type='text' name='email' id='email'>";
+  echo "<input type='text' name='email' id='email'>";
   echo " <input type='submit' value='Creer'>";
   echo "                      </form>";
 
