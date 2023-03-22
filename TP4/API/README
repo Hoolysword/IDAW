@@ -1,47 +1,26 @@
-README
+README for Users API
 
-This API allows you to manage a list of users stored in a database. You can perform the following CRUD operations:
+This is a simple RESTful API that allows users to perform CRUD (Create, Read, Update, Delete) operations on a user database. The API is built using PHP and uses JSON for data exchange.
 
-Create a new user
-Retrieve a list of all users or a single user by ID
-Update an existing user
-Delete a user
-Requirements:
+To use the API, you can send HTTP requests to the following endpoints:
 
-PHP 5.5 or higher
-MySQL
-Endpoints:
+GET /users: Retrieves all users in the database.
+GET /users/{id}: Retrieves a single user by ID.
+POST /users: Creates a new user in the database.
+DELETE /users: Deletes all users in the database.
+DELETE /users/{id}: Deletes a single user by ID.
+PUT /users: Updates a user in the database.
+Request parameters:
 
-GET /users - Retrieves a list of all users
-GET /users?id={id} - Retrieves a single user by ID
-POST /users - Creates a new user
-POST /users?id={id} - Updates an existing user by ID
-DELETE /users - Deletes all users
-DELETE /users?id={id} - Deletes a single user by ID
-To use the API, follow these steps:
+id: The ID of the user to retrieve or delete.
+name: The name of the user to create or update.
+email: The email of the user to create or update.
+Response format:
 
-Create a database and table
-Create a new MySQL database
+The API returns responses in JSON format, with the following structure:
 
-Create a new table named users with the following fields:
-
-id (int, auto-increment, primary key)
-name (varchar)
-email (varchar)
-Configure the database connection
-Open the dbconnect.php file and modify the following variables according to your database configuration:
-
-$db_host - the hostname of your database server
-$db_name - the name of your database
-$db_user - the username to connect to the database
-$db_pass - the password to connect to the database
-Upload the API files to your server
-Upload all the files to your server.
-Test the API
-Open a web browser and navigate to the following URL: http://yourdomain.com/users
-If everything is configured correctly, you should see a list of all users in JSON format.
-Notes:
-
-All data is returned in JSON format.
-When creating or updating a user, you must include the name and email fields in the POST request.
-When updating a user, you must include the id field in the POST request.
+{
+"status": 1, // 0 for error, 1 for success
+"status_message": "Success", // error or success message
+"data": [] // data returned by the API
+}

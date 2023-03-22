@@ -16,15 +16,9 @@ switch($request_method)
     }
     break;
   case 'POST':
-    if(!empty($_GET['id']))
-    {
-        $id = intval($_GET["id"]);
-        updateUsers($id);
-    }
-    else
-    {
+    
     addUsers();
-    }
+  
     break;
     case 'DELETE':
         if(!empty($_GET["id"]))
@@ -68,8 +62,8 @@ function addUsers(){
       
      $sql = "INSERT INTO users(name,email)  VALUES ('$name',
          '$email')";
-     $pdo->prepare($sql)->execute();
-     if ($pdo->prepare($sql)->rowCount() > 0)
+    $result= $pdo->prepare($sql)->execute();
+     if ($result)
     {$response=array(
         'status' => 1,
         'status_message' =>'Utilisateur ajoute avec succes.'
@@ -94,8 +88,20 @@ function deleteUsers($id = null){
         $query=$pdo->prepare($sql);
     }
     $query->execute();
+    $result=$query->execute();
     $response=array();
-
+    if ($result)
+    {$response=array(
+        'status' => 1,
+        'status_message' =>'Utilisateur ajoute avec succes.'
+      );}
+ else
+     {$response=array(
+        'status' => 0,
+        'status_message' =>'Erreur de la requête.'
+      );
+    }
+    
     $response=array(
         'status' => 1,
         'status_message' =>'Utilisateur supprimmer avec succes.'
@@ -104,25 +110,29 @@ function deleteUsers($id = null){
     echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
-function updateUsers($id){
-    require_once('dbconnect.php');
-    $name =  $_POST['name'];
-    $email = $_POST['email'];
-     $sql = "UPDATE users
-     SET name = '$name',
-       email = '$email'
-     WHERE id =$id";
-    
-     $pdo->prepare($sql)->execute();
-     $response=array(
-        'status' => 1,
-        'status_message' =>'Utilisateur mis à jour  avec succes.'
-      );
-    header('Content-Type: application/json');
-    echo json_encode($response, JSON_PRETTY_PRINT);
+function updateUsers(){
+  require_once('dbconnect.php');
+  $json=file_get_contents('php://input');
+  $put= json_decode($json, TRUE);
+  $id = $put['id'];
+  $name = $put['name'];
+  $email = $put['email'];
+   $sql = "UPDATE users
+   SET name = '$name',
+     email = '$email'
+   WHERE id =$id";
 
-
-
+   $test = $pdo->prepare($sql)->execute();
+   if($test){
+   $response=array(
+      'status' => 1,
+      'status_message' =>'Utilisateur mis à jour  avec succes.'
+    );}else{ $response=array(
+      'status' => 0,
+      'status_message' =>'erreur');
+    }
+  header('Content-Type: application/json');
+  echo json_encode($response, JSON_PRETTY_PRINT);
 }
 
 ?>
