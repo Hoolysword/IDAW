@@ -61,10 +61,19 @@ margin-bottom: 100px;
 
 </form>
 <script>
-    var i=0;
+    var edit=false;
+    var row;
 function onFormSubmit() {
-    console.log("hello");
 // prevent the form to be sent to the server
+if(edit){
+    event.preventDefault();
+    row.find("td:eq(0)").text($("#inputNom").val());
+    row.find("td:eq(1)").text($("#inputPrenom").val());
+    row.find("td:eq(2)").text($("#inputDateNaissance").val());
+    row.find("td:eq(3)").text($("#inputLike").val());
+    row.find("td:eq(4)").text($("#inputRemarque").val());
+}
+else{
 event.preventDefault();
 let nom = $("#inputNom").val();
 $("#inputNom").val('');
@@ -76,11 +85,12 @@ let aime = $("#inputLike").val();
 $("#inputLike").val('');
 let remarque = $("#inputRemarque").val();
 $("#inputRemarque").val('');
-$("#studentsTableBody").append(`<tr id="${i}"><td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${aime}</td><td>${remarque}</td> <td> <button type="button" onclick="deleteElement()" >Delete</button> <button type="button" onclick="editElement()">Edit</button></td></tr>`);
-i++;
+$("#studentsTableBody").append(`<tr><td>${nom}</td><td>${prenom}</td><td>${date}</td><td>${aime}</td><td>${remarque}</td> <td> <button type="button" onclick="deleteElement()" >Delete</button> <button type="button" onclick="editElement()">Edit</button></td></tr>`);
+}
+edit=false;
 }
 function editElement() {
-    let row = $(event.target).closest("tr");
+    row = $(event.target).closest("tr");
     let nom = row.find("td:eq(0)").text();
     let prenom = row.find("td:eq(1)").text();
     let date = row.find("td:eq(2)").text();
@@ -91,23 +101,15 @@ function editElement() {
     $("#inputDateNaissance").val(date);
     $("#inputLike").prop("checked", aime === "true");
     $("#inputRemarque").val(remarque);
-    $("#addStudentForm").on('submit', function() { update(row); });
+    edit = true;
 }
 
 function deleteElement() {
+
   // get the closest <tr> element to the clicked button
-  let row = $(event.target).closest("tr");
+    row = $(event.target).closest("tr");
   // remove the <tr> element
   row.remove();
-}
-function update(row){
-    console.log("hi");
-    row.find("td:eq(0)").text($("#inputNom").val());
-    row.find("td:eq(1)").text($("#inputPrenom").val());
-    row.find("td:eq(2)").text($("#inputDateNaissance").val());
-    row.find("td:eq(3)").text($("#inputLike").val());
-    row.find("td:eq(4)").text($("#inputRemarque").val());
-    return false;
 }
 </script>
 </body>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<title>tabletest</title>
+<style>
+body{ margin-top: 5em; }
+.table {
+margin-top: 100px;
+margin-bottom: 100px;
+}
+</style>
+</head>
+<body>
+    <div id="res"> </div>
+<table class="table">
+<thead>
+<tr>
+<th scope="col">Name</th>
+<th scope="col">Email</th>
+<th scope="col">CRUD</th>
+</tr>
+</thead>
+<tbody id="studentsTableBody">
+
+</tbody>
+</table>
+<form id="addStudentForm" action="" onsubmit="onFormSubmit();">
+    <div class="form-group row">
+
+        <label for="inputNom" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="inputNom" >
+        </div>
+
+        <label for="inputPrenom" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="inputPrenom" >
+        </div>
+
+       
+    </div>
+<button type="submit" >Submit</button>
+
+</form>
+<script>
+ 
+    
+       $.ajax({
+        url: "http://localhost/IDAW/TP4/API/users",
+
+        method: "GET",
+
+
+        dataType : "json",
+    })
+
+   .done(function(response){
+        initTable(response);
+    })
+
+
+    .fail(function(error){
+        alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+    })
+
+
+    .always(function(){
+        alert("Requête effectuée");
+     })
+     
+    function initTable(response){
+        for(var i=0;i<response.length;i++){
+        $("#studentsTableBody").append(`<tr><td>${response[i]['name']}</td><td>${response[i]['email']}</td> <td> <button type="button" onclick="onFormSubmit()" >Delete</button> <button type="button" onclick="editElement()">Edit</button></td></tr>`);
+    }};
+    
+    function onFormSubmit(){
+        event.preventDefault();
+        alert("hi");
+        $.ajax({
+        url: "http://localhost/IDAW/TP4/API/users",
+
+        method: "POST",
+
+
+        dataType : "json",
+        data: 
+        {
+  "name": "Roro",
+  "email": "ro@gmail.com",
+    });
+    };
+    $("#res").append ("<button type='button' onclick='onFormSubmit();'>OO</button>");
+    
+</script>
+</body>
+</html>
