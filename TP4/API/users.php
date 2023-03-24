@@ -65,7 +65,7 @@ function addUsers(){
     $result= $pdo->prepare($sql)->execute();
      if ($result)
     {$response=array(
-        'status' => 1,
+        'status' => "HTTP 201",
         'status_message' =>'Utilisateur ajoute avec succes.'
       );}
  else
