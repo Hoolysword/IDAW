@@ -57,6 +57,8 @@
     <script src="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.js"></script>
     <script>
         let table;
+        let edit =false;
+        let row;
         $(document).ready(function () {
             initTable();
         })
@@ -84,12 +86,14 @@
 
 
         function onFormSubmit() {
-
+            if(edit){
+                event.preventDefault();
+            }
+            else{
             event.preventDefault();
-            alert("hi");
             let nom = $("#inputNom").val();
             let email = $("#inputEmail").val();
-            $("#inputNom").val('');_
+            $("#inputNom").val('');
             $("#inputEmail").val('');
 
             $.ajax({
@@ -107,9 +111,11 @@
             });
             table.destroy();
             initTable();
+            }   
         };
 
         $(document).on("click", ".delete", deleteElement);
+        $(document).on("click", ".edit", updateElement);
 
         function deleteElement() {
 
@@ -146,17 +152,12 @@
         }
         function updateElement() {
             row = $(event.target).closest("tr");
-    let id = row.find("td:eq(0)").text();
-    let name = row.find("td:eq(1)").text();
-    let date = row.find("td:eq(2)").text();
-    let aime = row.find("td:eq(3)").text();
-    let remarque = row.find("td:eq(4)").text();
-    $("#inputNom").val(nom);
-    $("#inputPrenom").val(prenom);
-    $("#inputDateNaissance").val(date);
-    $("#inputLike").prop("checked", aime === "true");
-    $("#inputRemarque").val(remarque);
-    edit = true;
+            let id = row.find("td:eq(0)").text();
+            let name = row.find("td:eq(1)").text();
+            let email = row.find("td:eq(2)").text();
+            $("#inputNom").val(name);
+            $("#inputEmail").val(email);
+            edit = true;
 
         }
 
