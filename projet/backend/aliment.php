@@ -1,26 +1,17 @@
 <?php
 
-$request_method = $_SERVER["REQUEST_METHOD"];
-switch ($request_method) {
+$request_method=$_SERVER["REQUEST_METHOD"];
+switch($request_method)
+{
   case 'GET':
-    if (!empty($_GET["id"])) {
-      $id = intval($_GET["id"]);
-      getAliment($id);
-    } else {
-      // Récupérer tous les produits
-      getAliment();
+    if(!empty($_GET["nom"]))
+    {
+      $nom = $_GET["nom"];
+      getAliment($nom);
     }
     break;
   case 'POST':
     addAliment();
-
-    break;
-  case 'DELETE':
-      $id = intval($_GET["id"]);
-      deleteAliment($id);
-    break;
-  case 'PUT':
-    updateAliment();
     break;
 
   default:
@@ -29,105 +20,34 @@ switch ($request_method) {
     break;
 }
 
-function getAliment($id = null)
-{
+function getAliment($nom){
+    require_once('init_pdo.php');
+    $query = $pdo->prepare("SELECT * FROM aliments WHERE nom = ?");
+    $query->execute([$nom]);
+    $response=array();
+    $response = $query->fetchAll();
+    $res = array("data" => $response);
+    header('Content-Type: application/json');
+    echo json_encode($res, JSON_PRETTY_PRINT);
+}
+function addAliment(){
   require_once('init_pdo.php');
-  if ($id === null) {
-    $query = $pdo->prepare("select * from users");
-  } else {
-    $query = $pdo->prepare("select * from users where id = $id");
-  }
-  $query->execute();
-  $response = array();
-  $response = $query->fetchAll();
-  $res = array("data" => $response);
-  header('Content-Type: application/json');
-  echo json_encode($res, JSON_PRETTY_PRINT);
+    $nom =  $_POST['nom'];
+    $type = $_POST['type'];
+    $sql = "INSERT INTO aliments(nom,id_type)  VALUES ('$nom','$type')";
+    $test=$pdo->prepare($sql)->execute();
+    if ($test)
+    {$response=array(
+        'status' => 1,
+        'status_message' =>'Aliment ajoute avec succes.'
+      );}
+ else
+     {$response=array(
+        'status' => 0,
+        'status_message' =>'Erreur de la requête.'
+      );
+    }
+     header('Content-Type: application/json');
+     echo json_encode($response);
 }
-function addAliment()
-{
-  require_once('dbconnect.php');
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-
-  $sql = "INSERT INTO users(name,email)  VALUES ('$name',
-         '$email')";
-  $result = $pdo->prepare($sql)->execute();
-  if ($result) {
-    $response = array(
-      'status' => "HTTP 201",
-      'status_message' => 'Utilisateur ajoute avec succes.'
-    );
-  } else {
-    $response = array(
-      'status' => 0,
-      'status_message' => 'Erreur de la requête.'
-    );
-  }
-  header('Content-Type: application/json');
-  echo json_encode($response);
-}
-function deleteAliment($id = null)
-{
-  require_once('dbconnect.php');
-  if ($id === null) {
-    $sql = " TRUNCATE TABLE `users`";
-    $query = $pdo->prepare($sql);
-  } else {
-    $sql = "DELETE FROM `users`
-        WHERE id=$id";
-    $query = $pdo->prepare($sql);
-  }
-  $query->execute();
-  $result = $query->execute();
-  $response = array();
-  if ($result) {
-    $response = array(
-      'status' => 1,
-      'status_message' => 'Utilisateur ajoute avec succes.'
-    );
-  } else {
-    $response = array(
-      'status' => 0,
-      'status_message' => 'Erreur de la requête.'
-    );
-  }
-
-  $response = array(
-    'status' => 1,
-    'status_message' => 'Utilisateur supprimmer avec succes.'
-  );
-  header('Content-Type: application/json');
-  echo json_encode($response, JSON_PRETTY_PRINT);
-}
-
-function updateAliment()
-{
-  require_once('dbconnect.php');
-  $json = file_get_contents('php://input');
-  $put = json_decode($json, TRUE);
-  $id = $put['id'];
-  $name = $put['name'];
-  $email = $put['email'];
-  $sql = "UPDATE users
-   SET name = '$name',
-     email = '$email'
-   WHERE id =$id";
-
-  $test = $pdo->prepare($sql)->execute();
-  if ($test) {
-    $response = array(
-      'status' => 1,
-      'status_message' => 'Utilisateur mis à jour  avec succes.'
-    );
-  } else {
-    $response = array(
-      'status' => 0,
-      'status_message' => 'erreur'
-    );
-  }
-  header('Content-Type: application/json');
-  echo json_encode($response, JSON_PRETTY_PRINT);
-}
-
 ?>
