@@ -48,8 +48,9 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="h5 mb-0 mr-3 font-weight-bold text-white-50"></i>Ajouter un repas</a>
+                        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="index.php" data-toggle="modal" data-target="#AddModal">
+                        <i class="fas fa-clipboard-list fa-1x text-white-100"></i> Ajouter un repas</a>
+                         
                     </div>
 
                     <!-- Content Row -->
@@ -264,6 +265,7 @@
     </a>
 
     <?php
+        require_once("template_modal_add.php");
         require_once("template_modal_logout.php");
         require_once("template_scripts.php");
     ?>
