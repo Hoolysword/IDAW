@@ -50,8 +50,9 @@ alert(nom);
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="h5 mb-0 mr-3 font-weight-bold text-white-50"></i>Ajouter un repas</a>
+                        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="index.php" data-toggle="modal" data-target="#AddModal">
+                        <i class="fas fa-clipboard-list fa-1x text-white-100"></i> Ajouter un repas</a>
+                         
                     </div>
 
                     <!-- Content Row -->
@@ -223,36 +224,42 @@ alert(nom);
                         <div class="col-lg-6 mb-4">
                             <!-- Table historic -->
                             <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Aliments mangés aujourd'hui ...</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                                        custom components and custom utility classes.</p>
-                                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                                        Bootstrap framework, especially the utility classes.</p>
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Aliments mangés aujourd'hui ...</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Position</th>
+                                                <th>Office</th>
+                                                <th>Age</th>
+                                                <th>Start date</th>
+                                                <th>Salary</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Tiger Nixon</td>
+                                                <td>System Architect</td>
+                                                <td>Edinburgh</td>
+                                                <td>61</td>
+                                                <td>2011/04/25</td>
+                                                <td>$320,800</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->
@@ -266,6 +273,7 @@ alert(nom);
     </a>
 
     <?php
+        require_once("template_modal_add.php");
         require_once("template_modal_logout.php");
         require_once("template_scripts.php");
     ?>
