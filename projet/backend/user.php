@@ -45,7 +45,6 @@ function addUsers()
   $login = $_POST['login'];
   $mdp = $_POST['mdp'];
   $sexe = $_POST['sexe'];
-  $prenom = $_POST['prenom'];
   $niveau = $_POST['niveau'];
   $date = $_POST['date'];
 
