@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>SB Admin 2 - Register</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="js/config.js"></script>
+    <title>Projet IDAW Register</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -36,41 +37,57 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" onSubmit = "onFormSubmit()">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
+                                        <input type="text" class="form-control form-control-user" id="Prenom"
+                                            placeholder="Prenom">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
+                                        <input type="text" class="form-control form-control-user" id="Nom"
+                                            placeholder="Nom">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="niveau">niveau d'activité : </label>
+                                        <select name="niveau" id="niveau" class="form-control">
+                                            <option value = "faible"> faible </option>
+                                            <option value = "moyen"> moyen </option>
+                                            <option value = "élevé"> élevé </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="sexe">sexe : </label>
+                                        <select name="sexe" id="sexe" class="form-control">
+                                            <option value = "homme"> homme </option>
+                                            <option value = "femme"> femme </option>
+                                            <option value = "none" selected> non précisé </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                    <input type="text" class="form-control form-control-user" id="Login"
+                                        placeholder="login">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                            id="Password" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Repeat Password">
                                     </div>
                                 </div>
-                                <a href="login.php" class="btn btn-primary btn-user btn-block">
+                                <div class="form-group">
+                                    <input type="date" class="form-control form-control-user" id="Date"
+                                        placeholder="Date de naissance">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Register Account
-                                </a>
+                                </button>
                                 <hr>
-                                <a href="index.php" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.php" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
                             </form>
                             <hr>
                             <div class="text-center">
@@ -87,10 +104,65 @@
 
     </div>
 
-    <?php
-        require_once("template_scripts.php");
-    ?>
 
+    <script>
+        function onFormSubmit(){
+            event.preventDefault();
+            let nom = $('#Nom').val()
+            let prenom = $('#Prenom').val()
+            let date = $('#date').val()
+            let login = $('#Login').val()
+            let niveau = $('#niveau').val()
+            let sexe = $('#sexe').val()
+            let pwd = $('#Password').val()
+            alert(pwd);
+            $.ajax({
+                url: chemin + `/user`,
+
+                method: "POST",
+
+
+                dataType: "json",
+                data:
+                {
+                 "nom" : nom,
+                 "prenom" : prenom,
+                 "date" : "2",
+                 "login" : login,
+                 "niveau" : niveau,
+                 "sexe" : sexe,
+                 "mdp" : pwd
+                }
+
+            })
+                .done(function (response) {
+                    document.location.href='http://localhost/IDAW/projet/frontend/templates/login.php';
+                  
+                })
+
+
+                .fail(function (error) {
+                    alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                
+                })
+
+
+                .always(function () {
+                    //alert("Requête effectuée");
+                })
+    }
+        
+    </script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
 </body>
 
