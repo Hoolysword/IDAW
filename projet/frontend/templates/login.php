@@ -104,14 +104,18 @@
 
             })
                 .done(function (response) {
-                    if(response)
-                    document.location.href='http://localhost/IDAW/projet/frontend/templates/index.php'
+                    if(response['status']==1){
+                    document.location.href='http://localhost/IDAW/projet/frontend/templates/index.php'}
+                    else{
+                        alert("erreur de login/mot de passe ");
+                    }
+                  
                 })
 
 
                 .fail(function (error) {
                     //alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-                    alert("erreur de login/mot de passe ")
+                    alert("erreur de login/mot de passe ");
                 })
 
 
