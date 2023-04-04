@@ -6,7 +6,7 @@ $connectionString .= ";port=". _MYSQL_PORT;
 $connectionString .= ";dbname=" . _MYSQL_DBNAME;
 $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8' );
 $info = new PDO("mysql:host="._MYSQL_HOST.";port=". _MYSQL_PORT.";dbname=information_schema",_MYSQL_USER,_MYSQL_PASSWORD,$options);
-$drop =$info->prepare("SELECT table_name FROM tables WHERE table_schema = 'dbtest'");
+$drop =$info->prepare("SELECT table_name FROM tables WHERE table_schema =". _MYSQL_DBNAME);
 $drop->execute();
 $tables = $drop->fetchAll();
 try {
@@ -20,7 +20,7 @@ foreach($tables as $table){
     $delete= "DROP TABLE"." ".$table[0];
     $pdo->prepare($delete)->execute();
 }
-$sql = file_get_contents('sql/database.sql');
+$sql = file_get_contents('sql/idaw.sql');
 $pdo->exec($sql);
 
 ?>
