@@ -1,9 +1,8 @@
-<?php
-    echo    
-            '
+
                 <!-- Bootstrap core JavaScript-->
                 <script src="vendor/jquery/jquery.min.js"></script>
                 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 
                 <!-- Core plugin JavaScript-->
                 <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -21,6 +20,4 @@
                 <script src="js/demo/chart-pie-demo.js"></script>
                 <script src="js/demo/chart-bar-demo.js"></script>
                 <script src="js/demo/datatables-demo.js"></script>
-
-            '
-?>
+                <script src="js/config.js"></script>

@@ -1,1 +1,1 @@
-let chemin = "http://localhost/IDAW/projet/backend";
+let chemin = "http://localhost/IDAW PROJET/IDAW/projet/backend";
