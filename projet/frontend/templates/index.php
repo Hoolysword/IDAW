@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <?php
         session_start();
         ?>
@@ -20,12 +21,12 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
-<?php echo $_SESSION['login']?>
+<!-- <\?php echo $_SESSION['login']?> -->
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -48,7 +49,7 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                                class="h5 mb-0 mr-3 font-weight-bold text-white-50"></i>Ajouter un repas</a>
                     </div>
 
                     <!-- Content Row -->
