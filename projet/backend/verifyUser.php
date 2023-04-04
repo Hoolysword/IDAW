@@ -33,10 +33,13 @@ function verifyUser($login,$mdp){
             'status' => 1,
             'status_message' => 'Utilisateur authentifié  avec succes.'
           );
+          session_start();
+          $_SESSION['login']=$login;
+        $_SESSION['password']=$mdp;
     }
     else{
         $response = array(
-            'status' => 1,
+            'status' => 0,
             'status_message' => 'Utilisateur authentifié  avec succes.'
           );
     }

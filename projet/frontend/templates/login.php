@@ -2,8 +2,8 @@
 <html lang="en">
 <?php
         session_start();
-        $_SESSION['login']="a";
-        $_SESSION['password']="b";
+        session_unset();
+  session_destroy();
     ?>
 
 <head>
@@ -28,9 +28,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
-<?php echo $_SESSION['login']?>
 <body class="bg-gradient-primary">
-
     <div class="container">
 
         <!-- Outer Row -->
@@ -106,12 +104,14 @@
 
             })
                 .done(function (response) {
+                    if(response)
                     document.location.href='http://localhost/IDAW/projet/frontend/templates/index.php'
                 })
 
 
                 .fail(function (error) {
-                    alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                    //alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                    alert("erreur de login/mot de passe ")
                 })
 
 
