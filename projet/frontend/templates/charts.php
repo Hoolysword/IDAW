@@ -134,7 +134,7 @@
     </a>
 
     <?php
-        require_once("template_logout_modal.php");
+        require_once("template_modal_logout.php");
         require_once("template_scripts.php");
     ?>
 
