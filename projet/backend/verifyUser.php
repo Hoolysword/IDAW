@@ -28,19 +28,25 @@ function verifyUser($login,$mdp){
     
     $query->execute([$login]);
     $response = $query->fetchAll();
+    $nom=$response[0]["nom"];
+    $prenom=$response[0]["prenom"];
+    $id=$response[0]["id_user"];
     if($response[0]["mdp"]==$mdp){
         $response = array(
             'status' => 1,
-            'status_message' => 'Utilisateur authentifié  avec succes.'
+            'status_message' => "utilisateur authentifié"
           );
           session_start();
           $_SESSION['login']=$login;
         $_SESSION['password']=$mdp;
+        $_SESSION['nom']=$nom;
+        $_SESSION['prenom']=$prenom;
+        $_SESSION['id']=$id;
     }
     else{
         $response = array(
             'status' => 0,
-            'status_message' => 'Utilisateur authentifié  avec succes.'
+            'status_message' => "erreur "
           );
     }
     header('Content-Type: application/json');

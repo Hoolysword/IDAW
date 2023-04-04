@@ -33,9 +33,11 @@
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
-
+<script> 
+var nom= "<?php echo $_SESSION['nom']; ?>";
+alert(nom);
+</script>
 <body id="page-top">
-<!-- <\?php echo $_SESSION['login']?> -->
 
     <!-- Page Wrapper -->
     <div id="wrapper">
