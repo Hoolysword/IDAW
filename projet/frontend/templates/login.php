@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+        session_start();
+        $_SESSION['login']="a";
+        $_SESSION['password']="b";
+    ?>
 
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="js/config.js"></script>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -21,7 +28,7 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
-
+<?php echo $_SESSION['login']?>
 <body class="bg-gradient-primary">
 
     <div class="container">
@@ -41,11 +48,11 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" onsubmit="onFormSubmit();" >
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                                id="exampleInputLogin" aria-describedby="emailHelp"
+                                                placeholder="Enter Login...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
@@ -58,16 +65,11 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.php" class="btn btn-primary btn-user btn-block">
+                                        <p class="btn btn-primary btn-user btn-block" id="login">
                                             Login
-                                        </a>
+                                        </p>
                                         <hr>
-                                        <a href="index.php" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="index.php" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
+                                        
                                     </form>
                                     <hr>
                                     <div class="text-center">
@@ -88,6 +90,36 @@
 
     </div>
 
+<script>
+    $(document).on("click", "#login", onFormSubmit);
+    function onFormSubmit(){
+        let currentLogin = $("#exampleInputLogin").val();
+        let password = $("#exampleInputPassword").val();
+
+        $.ajax({
+                url: chemin + `/verifyUser?login=${currentLogin}& mdp=${password}`,
+
+                method: "GET",
+
+
+                dataType: "json",
+
+            })
+                .done(function (response) {
+                    document.location.href='http://localhost/IDAW/projet/frontend/templates/index.php'
+                })
+
+
+                .fail(function (error) {
+                    alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+                })
+
+
+                .always(function () {
+                    //alert("Requête effectuée");
+                })
+    }
+</script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -25,7 +25,7 @@ switch($request_method)
 }
 
 function getContient($id_aliment,$nutriment = null){
-    require_once('dbconnect.php');
+  require_once('init_pdo.php');
     echo ($nutriment);
     if($nutriment == null){
         $query = $pdo->prepare("SELECT id_nut, quantité FROM contient WHERE id_alim = $id_aliment");
@@ -44,7 +44,7 @@ function getContient($id_aliment,$nutriment = null){
     echo json_encode($res, JSON_PRETTY_PRINT);
 }
 function addContient(){
-    require_once('dbconnect.php');
+  require_once('init_pdo.php');
     $id_aliment =  $_POST['id_aliment'];
     $id_nutriment = $_POST['id_nutriment'];
     $quantité = $_POST['quantité'];
