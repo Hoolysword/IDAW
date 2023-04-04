@@ -1,0 +1,1 @@
+let chemin = "http://localhost/IDAW/projet/backend";
