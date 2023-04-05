@@ -34,7 +34,8 @@
 
 </head>
 <script> 
-var nom= "<?php echo $_SESSION['nom']; ?>";
+    var id= "<?php echo $_SESSION['id']; ?>";
+    // alert(id);
 </script>
 <body id="page-top">
 
@@ -247,15 +248,16 @@ var nom= "<?php echo $_SESSION['nom']; ?>";
                                         </thead>
                                         <script>
                                         var table = $('#dataTable').DataTable({
-                                                    ajax: chemin+"/consomme",
+                                                    ajax: "http://localhost/IDAW PROJET/IDAW/projet/backend/consomme",
                                                     dataSrc: '',
                                                     dom: 'Bfrtip',
                                                     columns: [
-                                                        { "data": "id_alim" },
+                                                        { "data": "nom" },
                                                         { "data": "quantité" },
                                                         { "data": "date_consommation" },
                                                     ]
                                                                          });
+                                        
                                         </script>  
                                     </table>
                                 </div>
@@ -282,28 +284,9 @@ var nom= "<?php echo $_SESSION['nom']; ?>";
     <?php
         require_once("template_modal_add.php");
         require_once("template_modal_logout.php");
+        require_once("template_scripts.php");
     ?>
-       
-                <!-- Bootstrap core JavaScript-->
-                <script src="vendor/jquery/jquery.min.js"></script>
-                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                
 
-                <!-- Core plugin JavaScript-->
-                <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-                <!-- Custom scripts for all pages-->
-                <script src="js/sb-admin-2.min.js"></script>
-
-                <!-- Page level plugins -->
-                <script src="vendor/chart.js/Chart.min.js"></script>
-
-
-                <!-- Page level custom scripts -->
-                <script src="js/demo/chart-area-demo.js"></script>
-                <script src="js/demo/chart-pie-demo.js"></script>
-                <script src="js/demo/chart-bar-demo.js"></script>
-                
                 
 
 </body>

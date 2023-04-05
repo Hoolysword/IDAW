@@ -117,7 +117,7 @@
             let pwd = $('#Password').val()
             alert(pwd);
             $.ajax({
-                url: chemin + `/user`,
+                url: chemin + `/backend/user`,
 
                 method: "POST",
 
@@ -136,7 +136,7 @@
 
             })
                 .done(function (response) {
-                    document.location.href='http://localhost/IDAW/projet/frontend/templates/login.php';
+                    document.location.href= chemin + '/frontend/templates/login.php';
                   
                 })
 

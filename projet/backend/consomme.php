@@ -39,9 +39,14 @@ function getConsomme($id = null)
 {
   require_once('init_pdo.php');
   if ($id === null) {
-    $query = $pdo->prepare("SELECT id_alim,quantité,date_consommation,id FROM consomme");
+    $query = $pdo->prepare("SELECT DISTINCT consomme.id_alim, aliments.nom, consomme.quantité, consomme.date_consommation 
+    FROM consomme 
+    JOIN aliments ON consomme.id_alim = aliments.id ");
   } else {
-    $query = $pdo->prepare("SELECT id_alim,quantité,date_consommation,id FROM consomme WHERE id_user = $id");
+    $query = $pdo->prepare("SELECT DISTINCT consomme.id_alim, aliments.nom, consomme.quantité, consomme.date_consommation 
+    FROM consomme 
+    JOIN aliments ON consomme.id_alim = aliments.id 
+    WHERE id_user = $id");
   }
   $query->execute();
   $response = array();
