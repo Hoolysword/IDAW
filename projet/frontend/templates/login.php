@@ -95,7 +95,7 @@
         let password = $("#exampleInputPassword").val();
 
         $.ajax({
-                url: chemin + `/verifyUser?login=${currentLogin}& mdp=${password}`,
+                url: chemin + `/backend/verifyUser?login=${currentLogin}& mdp=${password}`,
 
                 method: "GET",
 
@@ -105,7 +105,7 @@
             })
                 .done(function (response) {
                     if(response['status']==1){
-                    document.location.href='http://localhost/IDAW/projet/frontend/templates/index.php'}
+                    document.location.href= chemin + '/frontend/templates/index.php'}
                     else{
                         alert("erreur de login/mot de passe ");
                     }
