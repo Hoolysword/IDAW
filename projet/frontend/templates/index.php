@@ -35,7 +35,6 @@
 </head>
 <script> 
 var nom= "<?php echo $_SESSION['nom']; ?>";
-alert(nom);
 </script>
 <body id="page-top">
 
@@ -248,7 +247,7 @@ alert(nom);
                                         </thead>
                                         <script>
                                         var table = $('#dataTable').DataTable({
-                                                    ajax: "http://localhost/IDAW PROJET/IDAW/projet/backend/consomme",
+                                                    ajax: chemin+"/consomme",
                                                     dataSrc: '',
                                                     dom: 'Bfrtip',
                                                     columns: [
