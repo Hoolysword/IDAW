@@ -4,12 +4,19 @@ $request_method = $_SERVER["REQUEST_METHOD"];
 switch ($request_method) {
   case 'GET':
     if (!empty($_GET["id_user"])) {
-      $id = intval($_GET["id_user"]);
-      getConsomme($id);
+      if (!empty($_GET["somme"])) {
+        $id = intval($_GET["id_user"]);
+        getSommeConsomme($id);
+      } else {
+        $id = intval($_GET["id_user"]);
+        getConsomme($id);
+      }
+      
     } else {
       // Récupérer tous les produits
       getConsomme();
     }
+
     break;
   case 'POST':
 
@@ -46,6 +53,43 @@ function getConsomme($id = null)
     $query = $pdo->prepare("SELECT DISTINCT consomme.id_alim, aliments.nom, consomme.quantité, consomme.date_consommation 
     FROM consomme 
     JOIN aliments ON consomme.id_alim = aliments.id 
+    WHERE id_user = $id");
+  }
+  $query->execute();
+  $response = array();
+  $response = $query->fetchAll();
+  $res = array("data" => $response);
+  header('Content-Type: application/json');
+  echo json_encode($res, JSON_PRETTY_PRINT);
+}
+function getSommeConsomme($id){
+  require_once('init_pdo.php');
+  if ($id === null) {
+    $query = $pdo->prepare("SELECT 
+    (consomme.quantité/100)*SUM(c1.quantité) AS total_kcal, 
+    (consomme.quantité/100)*SUM(c2.quantité) AS total_proteines, 
+    (consomme.quantité/100)*SUM(c3.quantité) AS total_glucides, 
+    (consomme.quantité/100)*SUM(c4.quantité) AS total_lipides 
+    
+    FROM consomme 
+    JOIN aliments a ON consomme.id_alim = a.id 
+    LEFT JOIN contient c1 ON a.id = c1.id_alim AND c1.id_nut = 136 
+    LEFT JOIN contient c2 ON a.id = c2.id_alim AND c2.id_nut = 141 
+    LEFT JOIN contient c3 ON a.id = c3.id_alim AND c3.id_nut = 143 
+    LEFT JOIN contient c4 ON a.id = c4.id_alim AND c4.id_nut = 142");
+  } else {
+    $query = $pdo->prepare("SELECT 
+    (consomme.quantité/100)*SUM(c1.quantité) AS total_kcal, 
+    (consomme.quantité/100)*SUM(c2.quantité) AS total_proteines, 
+    (consomme.quantité/100)*SUM(c3.quantité) AS total_glucides, 
+    (consomme.quantité/100)*SUM(c4.quantité) AS total_lipides 
+    
+    FROM consomme 
+    JOIN aliments a ON consomme.id_alim = a.id 
+    LEFT JOIN contient c1 ON a.id = c1.id_alim AND c1.id_nut = 136 
+    LEFT JOIN contient c2 ON a.id = c2.id_alim AND c2.id_nut = 141 
+    LEFT JOIN contient c3 ON a.id = c3.id_alim AND c3.id_nut = 143 
+    LEFT JOIN contient c4 ON a.id = c4.id_alim AND c4.id_nut = 142
     WHERE id_user = $id");
   }
   $query->execute();
@@ -141,5 +185,3 @@ function updateConsomme()
   header('Content-Type: application/json');
   echo json_encode($response, JSON_PRETTY_PRINT);
 }
-
-?>

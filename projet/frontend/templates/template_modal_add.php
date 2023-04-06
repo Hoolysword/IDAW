@@ -1,4 +1,8 @@
 <!-- Logout Modal-->
+<script> 
+    var nom= "<?php echo $_SESSION['nom']; ?>";
+    // alert(nom);
+</script>
 <div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -13,8 +17,9 @@
             <input type="text" id="search" placeholder="Search...">
             <ul id="suggestions"></ul>
             <script>
+                
                 var array = ({
-                                ajax: chemin + "/backend/aliment?nom="+id,
+                                ajax: chemin + "/backend/aliment?nom="+nom,
                                 dataSrc: '',
                                 dom: 'Bfrtip',
                                 columns: [
