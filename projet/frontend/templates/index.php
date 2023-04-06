@@ -248,7 +248,7 @@
                                         </thead>
                                         <script>
                                         var table = $('#dataTable').DataTable({
-                                                    ajax: "http://localhost/IDAW PROJET/IDAW/projet/backend/consomme",
+                                                    ajax: chemin+"/backend/consomme",
                                                     dataSrc: '',
                                                     dom: 'Bfrtip',
                                                     columns: [

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-        session_start();
-        ?>
+session_start();
+?>
+
 <head>
 
     <meta charset="utf-8">
@@ -36,7 +37,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
         <?php
-            require_once("template_menu.php");
+        require_once("template_menu.php");
         ?>
 
         <!-- Content Wrapper -->
@@ -45,7 +46,7 @@
             <!-- Main Content -->
             <div id="content">
                 <?php
-                    require_once("template_topbar.php");
+                require_once("template_topbar.php");
                 ?>
 
                 <!-- Begin Page Content -->
@@ -56,7 +57,7 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                       
+
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -70,51 +71,61 @@
                                             <th>Lipide</th>
                                         </tr>
                                     </thead>
-                                   
-                                    
+
+
                                 </table>
                                 <script>
-                                        var table = $('#dataTable').DataTable({
-                                                    ajax: chemin+"/aliment",
-                                                    dataSrc: '',
-                                                    dom: 'Bfrtip',
-                                                    columns: [
-                                                        { "data":"nom_alim" },
-                                                        { "data":"nom_type" },
-                                                        {  "data":"kcal",
-            "render": function(data, type, row, meta) {
-                // get the first element of the "kcal" array
-                var firstKcal = data[0];
-                // return the firstKcal value for display in the table
-                return firstKcal;
-            } },
-                                                        { "data":"proteine",
-                                                            "render": function(data, type, row, meta) {
-                // get the first element of the "kcal" array
-                var firstProteine = data[0];
-                // return the firstKcal value for display in the table
-                return firstProteine;
-            } },
-                                                        
-                                                    
-                                                        { "data":"glucide",
-                                                            "render": function(data, type, row, meta) {
-                // get the first element of the "kcal" array
-                var firstGlucide = data[0];
-                // return the firstKcal value for display in the table
-                return firstGlucide;
-            } },
-                                                        { "data":"lipides",
+                                    var table = $('#dataTable').DataTable({
+                                        ajax: chemin + "/backend/aliment",
+                                        deferLoading: 57,
+                                        dataSrc: '',
+                                        dom: 'Bfrtip',
+                                        columns: [
+                                            { "data": "nom_alim" },
+                                            { "data": "nom_type" },
+                                            {
+                                                "data": "kcal",
+                                                "render": function (data, type, row, meta) {
+                                                    // get the first element of the "kcal" array
+                                                    var firstKcal = data[0];
+                                                    // return the firstKcal value for display in the table
+                                                    return firstKcal;
+                                                }
+                                            },
+                                            {
+                                                "data": "proteine",
+                                                "render": function (data, type, row, meta) {
+                                                    // get the first element of the "kcal" array
+                                                    var firstProteine = data[0];
+                                                    // return the firstKcal value for display in the table
+                                                    return firstProteine;
+                                                }
+                                            },
 
-                                                            "render": function(data, type, row, meta) {
-                // get the first element of the "kcal" array
-                var firstLipide = data[0];
-                // return the firstKcal value for display in the table
-                return firstLipide;
-            } },
-                                                    ]
-                                                                         });
-                                        </script>  
+
+                                            {
+                                                "data": "glucide",
+                                                "render": function (data, type, row, meta) {
+                                                    // get the first element of the "kcal" array
+                                                    var firstGlucide = data[0];
+                                                    // return the firstKcal value for display in the table
+                                                    return firstGlucide;
+                                                }
+                                            },
+                                            {
+                                                "data": "lipides",
+
+                                                "render": function (data, type, row, meta) {
+                                                    // get the first element of the "kcal" array
+                                                    var firstLipide = data[0];
+                                                    // return the firstKcal value for display in the table
+                                                    return firstLipide;
+                                                }
+                                            },
+                                        ]
+                                        
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -147,8 +158,8 @@
     </a>
 
     <?php
-        require_once("template_modal_logout.php");
-        require_once("template_scripts.php");
+    require_once("template_modal_logout.php");
+    require_once("template_scripts.php");
     ?>
 
 
