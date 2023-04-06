@@ -50,7 +50,7 @@ function getAliment($id = null){
           'kcal'     => $aliment['kcal'],
           'proteine' => $aliment['proteines'],
           'glucide'  => $aliment['glucides'],
-          'lipides'  => $aliment['lipides']
+          'lipide'  => $aliment['lipides']
       ];
   }, $aliments);
 

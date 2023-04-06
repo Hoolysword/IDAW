@@ -96,7 +96,7 @@ session_start();
 
                                             },
                                             {
-                                                "data": "lipides"
+                                                "data": "lipide"
                                             },
                                         ]
 
