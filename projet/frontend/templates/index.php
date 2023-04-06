@@ -248,7 +248,7 @@
                                         </thead>
                                         <script>
                                         var table = $('#dataTable').DataTable({
-                                                    ajax: chemin+"/backend/consomme",
+                                                    ajax: chemin + "/backend/consomme?id_user="+id,
                                                     dataSrc: '',
                                                     dom: 'Bfrtip',
                                                     columns: [
