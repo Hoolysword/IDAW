@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <?php
-        session_start();
-        ?>
+session_start();
+?>
+
 <head>
 
     <meta charset="utf-8">
@@ -11,8 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    
-    <title>Dashboard</title>
+
+    <title>Page d'acceuil</title>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="js/config.js"></script>
@@ -25,7 +26,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-    
+
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
 
@@ -33,16 +34,16 @@
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
-<script> 
-    var id= "<?php echo $_SESSION['id']; ?>";
-    // alert(id);
+<script>
+    var id = <?php echo $_SESSION['id']; ?>;
 </script>
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
         <?php
-            require_once("template_menu.php");
+        require_once("template_menu.php");
         ?>
 
         <!-- Content Wrapper -->
@@ -51,18 +52,65 @@
             <!-- Main Content -->
             <div id="content">
                 <?php
-                    require_once("template_topbar.php");
+                require_once("template_topbar.php");
                 ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="index.php" data-toggle="modal" data-target="#AddModal">
-                        <i class="fas fa-clipboard-list fa-1x text-white-100"></i> Ajouter un repas</a>
-                         
+                        <h1 class="h3 mb-0 text-gray-800">Vue d'ensemble</h1>
+                        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="index.php"
+                            data-toggle="modal" data-target="#AddModal">
+                            <i class="fas fa-clipboard-list fa-1x text-white-100"></i> Ajouter un repas</a>
+
                     </div>
+                    <script>
+                        var kcal;
+                        var quantité;
+                        var myArray;
+                        var id_alim;
+                        $.ajax({
+                            url: chemin + "/backend/consomme?id_user=" + id,
+
+                            method: "GET",
+
+
+                            dataType: "json",
+
+                        })
+                            .done(function (response) {
+                                alert("work");
+                                var dataArray = response.data;
+
+                                // Convert the JSON data to a JavaScript array
+                                arrayConsomme = JSON.parse(JSON.stringify(dataArray));
+
+                                // Use the array as needed
+                                id_alim = arrayConsomme[0]["id_alim"];
+                                console.log(id_alim);
+                                quantité += arrayConsomme[0]["quantité"];
+                                $.ajax({
+                            url: chemin + "/backend/aliment?id=" + id_alim,
+
+                            method: "GET",
+
+
+                            dataType: "json",
+
+                        })
+                            .done(function (response) {
+                                var dataArray = response.data;
+
+                                // Convert the JSON data to a JavaScript array
+                                arrayAlim = JSON.parse(JSON.stringify(dataArray));
+                                console.log(arrayAlim[0]["kcal"][0]);
+                                kcal+=arrayAlim[0]["kcal"][0];
+                            })
+
+                            })
+                       
+                    </script>
 
                     <!-- Content Row -->
                     <div class="row">
@@ -195,7 +243,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
@@ -233,22 +281,22 @@
                         <div class="col-lg-6 mb-4">
                             <!-- Table historic -->
                             <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Aliments mangés aujourd'hui ...</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable">
-                                        <thead>
-                                            <tr>
-                                                <th>Aliment</th>
-                                                <th>Quantité (g)</th>
-                                                <th>Date de consommation</th>
-                                            </tr>
-                                        </thead>
-                                        <script>
-                                        var table = $('#dataTable').DataTable({
-                                                    ajax: chemin+"/backend/consomme",
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Aliments mangés aujourd'hui ...</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Aliment</th>
+                                                    <th>Quantité (g)</th>
+                                                    <th>Date de consommation</th>
+                                                </tr>
+                                            </thead>
+                                            <script>
+                                                var table = $('#dataTable').DataTable({
+                                                    ajax: chemin + "/backend/consomme?id_user=" + id,
                                                     dataSrc: '',
                                                     dom: 'Bfrtip',
                                                     columns: [
@@ -256,38 +304,38 @@
                                                         { "data": "quantité" },
                                                         { "data": "date_consommation" },
                                                     ]
-                                                                         });
-                                        
-                                        </script>  
-                                    </table>
+                                                });
+
+                                            </script>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /.container-fluid -->
+
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
 
             </div>
-            <!-- End of Main Content -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <?php
+        <?php
         require_once("template_modal_add.php");
         require_once("template_modal_logout.php");
         require_once("template_scripts.php");
-    ?>
+        ?>
 
-                
+
 
 </body>
 
