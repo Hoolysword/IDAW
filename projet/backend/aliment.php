@@ -23,84 +23,49 @@ switch($request_method)
     break;
 }
 
-function getAliment($id =null){
-    require_once('init_pdo.php');
-    if ($id === null) {
-      $query = $pdo->prepare("SELECT * FROM aliments ");
-      $query->execute();
-      $aliments = $query->fetchAll();
-      foreach($aliments as $aliment){
-        $query = $pdo->prepare("SELECT nom FROM type WHERE id = ? ");
-        $query->execute([$aliment["id_type"]]);
-        $type=$query->fetch();
-        $query = $pdo->prepare("SELECT quantité FROM contient WHERE id_alim = ? and id_nut=136 ");
-        $query->execute([$aliment["id"]]);
-        $kcal=$query->fetch();
-        $query = $pdo->prepare("SELECT quantité FROM contient WHERE id_alim = ? and id_nut=141 ");
-        $query->execute([$aliment["id"]]);
-        $proteines=$query->fetch();
-        $query = $pdo->prepare("SELECT quantité FROM contient WHERE id_alim = ? and id_nut=142 ");
-        $query->execute([$aliment["id"]]);
-        $glucides=$query->fetch();
-        $query = $pdo->prepare("SELECT quantité FROM contient WHERE id_alim = ? and id_nut=143 ");
-        $query->execute([$aliment["id"]]);
-        $lipides=$query->fetch();
-        $data=array(
-          'nom_alim' => $aliment['nom'],
-          'nom_type' => $type['nom'],
-          'kcal'    => $kcal,
-          'proteine' => $proteines,
-          'glucide' => $glucides,
-          'lipides' => $lipides
-        );
+function getAliment($id = null){
+  require_once('init_pdo.php');
+  $query = "
+  SELECT a.nom, t.nom AS nom_type, c1.quantité AS kcal, c2.quantité AS proteines, c3.quantité AS glucides, c4.quantité AS lipides 
+  FROM aliments a 
+  JOIN type t ON a.id_type = t.id 
+  LEFT JOIN contient c1 ON a.id = c1.id_alim AND c1.id_nut = 136 
+  LEFT JOIN contient c2 ON a.id = c2.id_alim AND c2.id_nut = 141 
+  LEFT JOIN contient c3 ON a.id = c3.id_alim AND c3.id_nut = 143 
+  LEFT JOIN contient c4 ON a.id = c4.id_alim AND c4.id_nut = 142";
 
-        $datas[]=$data;
-      }
-      $res=array("data" => $datas);
-      header('Content-Type: application/json');
-      echo json_encode($res, JSON_PRETTY_PRINT);
-    } else {
-    $query = $pdo->prepare("SELECT * FROM aliments WHERE id = ?");
-    $query->execute([$id]);
-    $response=array();
-    $aliment = $query->fetch();
-    $query = $pdo->prepare("SELECT nom FROM type WHERE id = ? ");
-        $query->execute([$aliment["id_type"]]);
-        $type=$query->fetch();
-        $query = $pdo->prepare("SELECT quantité FROM contient WHERE id_alim = ? and id_nut=136 ");
-        $query->execute([$aliment["id"]]);
-        $kcal=$query->fetch();
-        $query = $pdo->prepare("SELECT quantité FROM contient WHERE id_alim = ? and id_nut=141 ");
-        $query->execute([$aliment["id"]]);
-        $proteines=$query->fetch();
-        $query = $pdo->prepare("SELECT quantité FROM contient WHERE id_alim = ? and id_nut=142 ");
-        $query->execute([$aliment["id"]]);
-        $glucides=$query->fetch();
-        $query = $pdo->prepare("SELECT quantité FROM contient WHERE id_alim = ? and id_nut=143 ");
-        $query->execute([$aliment["id"]]);
-        $lipides=$query->fetch();
-        $data=array(
-          'nom_alim' => $aliment['nom'],
-          'nom_type' => $type['nom'],
-          'kcal'    => $kcal,
-          'proteine' => $proteines,
-          'glucide' => $glucides,
-          'lipides' => $lipides
-        );
+  if ($id !== null) {
+      $query .= " WHERE a.id = ?";
+      $params = [$id];
+  }
 
-        $datas[]=$data;
-      }
-      $res=array("data" => $datas);
-      header('Content-Type: application/json');
-      echo json_encode($res, JSON_PRETTY_PRINT);
+  $request = $pdo->prepare($query);
+  $request->execute($params ?? []);
+  $aliments = $request->fetchAll();
+
+  $datas = array_map(function($aliment) {
+      return [
+          'nom_alim' => $aliment['nom'],
+          'nom_type' => $aliment['nom_type'],
+          'kcal'     => $aliment['kcal'],
+          'proteine' => $aliment['proteines'],
+          'glucide'  => $aliment['glucides'],
+          'lipides'  => $aliment['lipides']
+      ];
+  }, $aliments);
+
+  $res = array("data" => $datas);
+  header('Content-Type: application/json');
+  echo json_encode($res, JSON_PRETTY_PRINT);
 }
+
 function addAliment(){
   require_once('init_pdo.php');
     $nom =  $_POST['nom'];
     $type = $_POST['type'];
     $sql = "INSERT INTO aliments(nom,id_type)  VALUES ('$nom','$type')";
-    $test=$pdo->prepare($sql)->execute();
-    if ($test)
+    $request=$pdo->prepare($sql)->execute();
+    if ($request)
     {$response=array(
         'status' => 1,
         'status_message' =>'Aliment ajoute avec succes.'
@@ -114,4 +79,3 @@ function addAliment(){
      header('Content-Type: application/json');
      echo json_encode($response);
 }
-?>

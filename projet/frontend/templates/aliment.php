@@ -20,9 +20,7 @@ session_start();
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.css" rel="stylesheet">
@@ -76,54 +74,32 @@ session_start();
                                 </table>
                                 <script>
                                     var table = $('#dataTable').DataTable({
-                                        ajax: chemin + "/backend/aliment",
+                                        ajax: chemin + "/backend/aliment.php",
                                         deferLoading: 57,
                                         dataSrc: '',
                                         dom: 'Bfrtip',
-                                        columns: [
-                                            { "data": "nom_alim" },
-                                            { "data": "nom_type" },
-                                            {
-                                                "data": "kcal",
-                                                "render": function (data, type, row, meta) {
-                                                    // get the first element of the "kcal" array
-                                                    var firstKcal = data[0];
-                                                    // return the firstKcal value for display in the table
-                                                    return firstKcal;
-                                                }
+                                        columns: [{
+                                                "data": "nom_alim"
                                             },
                                             {
-                                                "data": "proteine",
-                                                "render": function (data, type, row, meta) {
-                                                    // get the first element of the "kcal" array
-                                                    var firstProteine = data[0];
-                                                    // return the firstKcal value for display in the table
-                                                    return firstProteine;
-                                                }
-                                            },
-
-
-                                            {
-                                                "data": "glucide",
-                                                "render": function (data, type, row, meta) {
-                                                    // get the first element of the "kcal" array
-                                                    var firstGlucide = data[0];
-                                                    // return the firstKcal value for display in the table
-                                                    return firstGlucide;
-                                                }
+                                                "data": "nom_type"
                                             },
                                             {
-                                                "data": "lipides",
+                                                "data": "kcal"
+                                            },
+                                            {
+                                                "data": "proteine"
 
-                                                "render": function (data, type, row, meta) {
-                                                    // get the first element of the "kcal" array
-                                                    var firstLipide = data[0];
-                                                    // return the firstKcal value for display in the table
-                                                    return firstLipide;
-                                                }
+                                            },
+                                            {
+                                                "data": "glucide"
+
+                                            },
+                                            {
+                                                "data": "lipides"
                                             },
                                         ]
-                                        
+
                                     });
                                 </script>
                             </div>
