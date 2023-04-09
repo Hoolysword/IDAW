@@ -39,7 +39,6 @@
         <?php
             require_once("template_menu.php");
         ?>
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 

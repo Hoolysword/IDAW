@@ -36,6 +36,7 @@ session_start();
 </head>
 <script>
     var id = <?php echo $_SESSION['id']; ?>;
+    var date = <?php echo date("Y-m-d"); ?>;
 </script>
 
 <body id="page-top">
@@ -272,8 +273,9 @@ session_start();
                                                 </tr>
                                             </thead>
                                             <script>
+                                                
                                                 var table = $('#dataTable').DataTable({
-                                                    ajax: chemin + "/backend/consomme?id_user=" + id,
+                                                    ajax: chemin + "/backend/consomme?id_user=" + id +"&date=" + date,
                                                     dataSrc: '',
                                                     dom: 'Bfrtip',
                                                     columns: [
