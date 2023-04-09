@@ -1,0 +1,102 @@
+API Aliment:
+
+
+Endpoints:
+GET /aliments: Retrieve information about all food items.
+GET /aliments?id={id}: Retrieve information about a specific food item by its ID.
+GET /aliments?nom_alimentation={nom_alimentation}: Get the ID of a food item by its name.
+POST /aliments: Add a new food item.
+GET /aliments
+Retrieves information about all food items. Returns a JSON object with an array of objects containing the following properties for each food item:
+
+nom_alim: The name of the food item.
+nom_type: The type of food item.
+kcal: The number of calories in the food item.
+proteine: The amount of protein in the food item.
+glucide: The amount of carbohydrates in the food item.
+lipide: The amount of fat in the food item.
+GET /aliments?id={id}
+Retrieves information about a specific food item by its ID. Returns a JSON object with an array of objects containing the same properties as the GET /aliments endpoint, but only for the specified food item.
+
+GET /aliments?nom_alimentation={nom_alimentation}
+Get the ID of a food item by its name. Returns a JSON object with an array of objects containing the ID of the food item with the specified name.
+
+POST /aliments
+Add a new food item. Expects a JSON object with the following properties:
+
+nom: The name of the food item.
+type: The type of food item.
+Returns a JSON object with a status property indicating whether the operation was successful (1 for success, 0 for failure) and a status_message property with a message describing the result of the operation.
+
+
+API Consomme:
+
+
+Endpoints:
+GET /consumptions: Retrieves all food consumption records for all users. If a user ID is provided as a query parameter, only the records for that user are returned.
+GET /consumptions/{id}: Retrieves the food consumption record with the specified ID.
+POST /consumptions: Adds a new food consumption record.
+PUT /consumptions/{id}: Updates the food consumption record with the specified ID.
+DELETE /consumptions/{id}: Deletes the food consumption record with the specified ID.
+GET /users/{id}/nutrition: Retrieves nutritional information for a user's food consumption records. The user ID must be provided as a path parameter.
+GET /foods: Retrieves a list of all foods in the database.
+GET /foods/{id}: Retrieves the food with the specified ID.
+POST /foods: Adds a new food to the database.
+PUT /foods/{id}: Updates the food with the specified ID.
+DELETE /foods/{id}: Deletes the food with the specified ID.
+
+Contient API:
+
+
+Endpoints:
+
+GET /contient?id_aliment={id_aliment}
+Retrieves all nutriments and quantities for a specific food item.
+
+Parameters:
+
+id_aliment (required): The ID of the food item to retrieve information for.
+GET /contient?id_aliment={id_aliment}&nutriment={nutriment}
+Retrieves the quantity of a specific nutriment for a specific food item.
+
+Parameters:
+
+id_aliment (required): The ID of the food item to retrieve information for.
+nutriment (required): The name of the nutriment to retrieve information for.
+POST /contient
+Adds a new nutriment and quantity entry for a specific food item.
+
+Parameters:
+
+id_aliment (required): The ID of the food item to add the entry for.
+id_nutriment (required): The ID of the nutriment to add the entry for.
+quantité (required): The quantity of the nutriment to add for the food item.
+
+TYPE API:
+
+
+
+Endpoint: /getTypes?id_aliment={id_aliment}
+Method: GET
+
+This endpoint retrieves the name of the type of food associated with a specific food item, identified by its id_aliment parameter. The endpoint returns a JSON object with the name of the food type in the data field.
+
+USER API:
+
+Endpoint:
+
+URL: /users
+Method: GET
+Optional query parameter: login
+Functionality: Retrieves all users if no login parameter is provided, or retrieves a specific user by login.
+
+URL: /users
+Method: POST
+Data parameters: nom, prenom, login, mdp, sexe, niveau, date
+Functionality: Adds a new user to the database with the provided data.
+
+verifyUser API:
+
+Endpoints:
+
+/verifyUser: This endpoint accepts a GET request with parameters login and mdp for the user's login and password, respectively. It verifies the user's credentials and returns a JSON response with a status and status_message indicating whether the user is authenticated or not.

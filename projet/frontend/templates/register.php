@@ -110,7 +110,7 @@
             event.preventDefault();
             let nom = $('#Nom').val()
             let prenom = $('#Prenom').val()
-            let date = $('#date').val()
+            let dateNaissance = $('#Date').val()
             let login = $('#Login').val()
             let niveau = $('#niveau').val()
             let sexe = $('#sexe').val()
@@ -127,7 +127,7 @@
                 {
                  "nom" : nom,
                  "prenom" : prenom,
-                 "date" : "2",
+                 "date" : dateNaissance,
                  "login" : login,
                  "niveau" : niveau,
                  "sexe" : sexe,

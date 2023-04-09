@@ -57,7 +57,7 @@ default:
 
     define('_MYSQL_PORT',3306); 
 
-    define('_MYSQL_DBNAME','idaw_1');
+    define('_MYSQL_DBNAME','idaw');
 
     define('_MYSQL_USER','root');
 

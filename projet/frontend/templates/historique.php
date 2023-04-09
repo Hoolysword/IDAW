@@ -63,30 +63,30 @@
                             <h6 class="m-0 font-weight-bold text-primary">Historiques</h6>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable"width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Aliment</th>
-                                                <th>Quantité (g)</th>
-                                                <th>Date de consommation</th>
-                                            </tr>
-                                        </thead>
-                                        <script>
-                                        var table = $('#dataTable').DataTable({
-                                                    ajax: chemin + "/backend/consomme?id_user="+id,
+                        <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Aliment</th>
+                                                    <th>Quantité (g)</th>
+                                                    <th>Date de consommation</th>
+                                                </tr>
+                                            </thead>
+                                            <script>
+                                                var table = $('#dataTable').DataTable({
+                                                    ajax: chemin + "/backend/consomme?id_user=" + id,
                                                     dataSrc: '',
                                                     dom: 'Bfrtip',
                                                     columns: [
-                                                        { "data": "id_alim" },
+                                                        { "data": "nom" },
                                                         { "data": "quantité" },
                                                         { "data": "date_consommation" },
                                                     ]
-                                                                         });
-                                        
-                                        </script>  
-                                </table>
-                            </div>
+                                                });
+
+                                            </script>
+                                        </table>
+                                    </div>
                         </div>
                     </div>
 
