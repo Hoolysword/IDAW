@@ -23,7 +23,9 @@ session_start();
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
@@ -58,7 +60,8 @@ session_start();
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Vue d'ensemble</h1>
-                        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="index.php" data-toggle="modal" data-target="#AddModal">
+                        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="index.php"
+                            data-toggle="modal" data-target="#AddModal">
                             <i class="fas fa-clipboard-list fa-1x text-white-100"></i> Ajouter un repas</a>
 
                     </div>
@@ -68,26 +71,27 @@ session_start();
                         var glucide;
                         var proteine;
                         $.ajax({
-                                url: chemin + "/backend/consomme?id_user=" + id + "&somme=1",
+                            url: chemin + "/backend/consomme?id_user=" + id+"&somme=1",
+                            
+                            method: "GET",
 
-                                method: "GET",
+                            dataType: "json",
 
-                                dataType: "json",
-
-                            })
-                            .done(function(response) {
-                                var dataArray = response.data;
-                                var arraySomme = JSON.parse(JSON.stringify(dataArray));
+                        })
+                            .done(function (response) {
+                                var dataArray=response.data;
+                               var  arraySomme= JSON.parse(JSON.stringify(dataArray));
                                 console.log(arraySomme[0]["total_lipides"]);
-                                kcal = arraySomme[0]["total_kcal"];
-                                lipide = arraySomme[0]["total_lipides"];
-                                glucide = arraySomme[0]["total_glucides"];
-                                proteine = arraySomme[0]["total_proteines"];
-                                $("#totkcal").html(kcal);
-                                $("#totlipide").html(lipide);
-                                $("#totprot").html(proteine);
-                                $("#totglucide").html(glucide);
+                                kcal=arraySomme[0]["total_kcal"];
+                               lipide=arraySomme[0]["total_lipides"];
+                       glucide=arraySomme[0]["total_glucides"];
+                        proteine=arraySomme[0]["total_proteines"];
+                                $("#totkcal").html (kcal);
+                                $("#totlipide").html (lipide);
+                                $("#totprot").html (proteine);
+                                $("#totglucide").html (glucide);
                             })
+                            
                     </script>
 
                     <!-- Content Row -->
@@ -104,7 +108,7 @@ session_start();
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="totkcal"></div>
                                         </div>
                                         <div class="col-auto">
-
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +123,7 @@ session_start();
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Lipides</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totlipide"></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"id="totlipide"></div>
                                         </div>
                                         <div class="col-auto">
                                         </div>
@@ -138,15 +142,15 @@ session_start();
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="totprot"></div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"id="totprot"></div>
                                                 </div>
                                                 <div class="col">
-
+                                                   
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +165,7 @@ session_start();
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Glucides</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totglucide"></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"id="totglucide"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -179,13 +183,16 @@ session_start();
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
                                     <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
                                             <div class="dropdown-header">Dropdown Header:</div>
                                             <a class="dropdown-item" href="#">Action</a>
                                             <a class="dropdown-item" href="#">Another action</a>
@@ -196,70 +203,11 @@ session_start();
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pb-2">
-                                        <div class="chartCard">
-                                            <div class="chartBox">
-                                                <canvas id="myChart"></canvas>
-                                            </div>
-                                        </div>
-                                        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
-
-
-                                        <script>
-                                            // setup 
-                                            const data = {
-                                                labels: ['Kcal', 'Proteine', 'Glucide', 'Lipide'],
-                                                datasets: [{
-                                                    label: 'Your consommation',
-                                                    data: [ $("#totkcal").val(),$("#totprot").val(),$("#totglucide").val(),$("#totlipide").val()],
-                                                    backgroundColor: [
-                                                        'rgba(255, 26, 104, 0.2)',
-                                                        'rgba(54, 162, 235, 0.2)',
-                                                        'rgba(255, 206, 86, 0.2)',
-                                                        'rgba(75, 192, 192, 0.2)',
-                                                        'rgba(153, 102, 255, 0.2)',
-                                                        'rgba(255, 159, 64, 0.2)',
-                                                        'rgba(0, 0, 0, 0.2)'
-                                                    ],
-                                                    borderColor: [
-                                                        'rgba(255, 26, 104, 1)',
-                                                        'rgba(54, 162, 235, 1)',
-                                                        'rgba(255, 206, 86, 1)',
-                                                        'rgba(75, 192, 192, 1)',
-                                                        'rgba(153, 102, 255, 1)',
-                                                        'rgba(255, 159, 64, 1)',
-                                                        'rgba(0, 0, 0, 1)'
-                                                    ],
-                                                    borderWidth: 1
-                                                }]
-                                            };
-
-                                            // config 
-                                            const config = {
-                                                type: 'radar',
-                                                data,
-                                                options: {
-                                                    scales: {
-                                                        y: {
-                                                            beginAtZero: true
-                                                        }
-                                                    }
-                                                }
-                                            };
-
-                                            // render init block
-                                            const myChart = new Chart(
-                                                document.getElementById('myChart'),
-                                                config
-                                            );
-
-                                            // Instantly assign Chart.js version
-                                            const chartVersion = document.getElementById('chartVersion');
-                                            chartVersion.innerText = Chart.version;
-
-                                        </script>
-
-                                        <!-- <span class="mr-2">
+                                    <div class="chart-pie pt-4 pb-2">
+                                        <canvas id="myPieChart"></canvas>
+                                    </div>
+                                    <div class="mt-4 text-center small">
+                                        <span class="mr-2">
                                             <i class="fas fa-circle text-primary"></i> Direct
                                         </span>
                                         <span class="mr-2">
@@ -267,7 +215,7 @@ session_start();
                                         </span>
                                         <span class="mr-2">
                                             <i class="fas fa-circle text-info"></i> Referral
-                                        </span> -->
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -277,13 +225,16 @@ session_start();
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
                                     <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
                                             <div class="dropdown-header">Dropdown Header:</div>
                                             <a class="dropdown-item" href="#">Action</a>
                                             <a class="dropdown-item" href="#">Another action</a>
@@ -325,17 +276,13 @@ session_start();
                                                     ajax: chemin + "/backend/consomme?id_user=" + id,
                                                     dataSrc: '',
                                                     dom: 'Bfrtip',
-                                                    columns: [{
-                                                            "data": "nom"
-                                                        },
-                                                        {
-                                                            "data": "quantité"
-                                                        },
-                                                        {
-                                                            "data": "date_consommation"
-                                                        },
+                                                    columns: [
+                                                        { "data": "nom" },
+                                                        { "data": "quantité" },
+                                                        { "data": "date_consommation" },
                                                     ]
                                                 });
+
                                             </script>
                                         </table>
                                     </div>
