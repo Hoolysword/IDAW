@@ -3,8 +3,7 @@
 <?php
         session_start();
         session_unset();
-        //session_destroy();
-        // require_once("../../backend/init_db.php");
+        session_destroy(); 
 ?>
 
 <head>
