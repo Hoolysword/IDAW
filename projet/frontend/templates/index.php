@@ -275,7 +275,7 @@ session_start();
                                             <script>
                                                 
                                                 var table = $('#dataTable').DataTable({
-                                                    ajax: chemin + "/backend/consomme?id_user=" + id +"&date=" + date,
+                                                    ajax: chemin + "/backend/consomme?id_user=" + id ,
                                                     dataSrc: '',
                                                     dom: 'Bfrtip',
                                                     columns: [
